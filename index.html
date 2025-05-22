@@ -1,21 +1,168 @@
 <!DOCTYPE html>
-<html class="">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/assets/style.css" />
-    <title>SUGARSCAT</title>
-    <meta name="description" content="Dream it." />
-    <style>
-      #app {
-        display: none;
-      }
-    </style>
-  </head>
-  <body>
-    <!--加载动画-->
-    <view class="line-wobble" id="index-loader"> </view>
-  </body>
-  <!--man.js-->
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sugarscat - Just a developer</title>
+  <!-- Lucide Icon CDN -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #222;
+      --card-bg: #f9f9f9;
+      --link-color: #007acc;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #1e1e1e;
+      --text-color: #f0f0f0;
+      --card-bg: #2c2c2c;
+      --link-color: #4eaaff;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .card {
+      position: relative;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px var(--shadow);
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+      width: 320px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-color);
+      padding: 0.3rem;
+      transition: color 0.3s;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 3px solid var(--link-color);
+    }
+
+    h1 {
+      margin: 0.5rem 0;
+      font-size: 1.6rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--text-color);
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .socials a {
+      color: var(--text-color);
+      transition: color 0.3s ease;
+    }
+
+    .socials a:hover {
+      color: var(--link-color);
+    }
+
+    .socials svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      color: var(--text-color);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <!-- Theme toggle button -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <i id="theme-icon" data-lucide="moon"></i>
+    </button>
+
+    <!-- Gravatar for tzwlink@163.com -->
+    <img class="avatar" src="https://www.gravatar.com/avatar/5f5ddffa3a848fa1a791260820c20564?s=200" alt="Avatar" />
+    
+    <h1>Sugarscat</h1>
+    <p>Just a developer</p>
+
+    <div class="socials">
+      <a href="https://github.com/sugarscat" target="_blank" title="GitHub">
+        <i data-lucide="github"></i>
+      </a>
+      <a href="https://example.com" target="_blank" title="Website">
+        <i data-lucide="globe"></i>
+      </a>
+    </div>
+
+    <footer>© 2025 Sugarscat · Powered by GitHub Pages</footer>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      lucide.createIcons();
+      updateThemeIcon();
+    });
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      updateThemeIcon();
+    }
+
+    function updateThemeIcon() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const icon = document.getElementById('theme-icon');
+      icon.setAttribute('data-lucide', current === 'dark' ? 'sun' : 'moon');
+      lucide.createIcons();
+    }
+
+    // Default to browser theme
+    (function () {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const html = document.documentElement;
+      html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+    })();
+  </script>
+
+</body>
 </html>
