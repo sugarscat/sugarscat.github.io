@@ -1,3 +1,3 @@
-# Sugarscat
+# Website
 
-Personal website
+A website
