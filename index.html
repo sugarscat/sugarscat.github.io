@@ -1,168 +1,204 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="auto">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sugarscat - Just a developer</title>
-  <!-- Lucide Icon -->
-  <script src="lucide.min.js"></script>
-  <style>
-    :root {
-      --bg-color: #ffffff;
-      --text-color: #222;
-      --card-bg: #f9f9f9;
-      --link-color: #007acc;
-      --shadow: rgba(0, 0, 0, 0.1);
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sugarscat - Just a developer</title>
+    <style>
+      :root {
+        --bg-color: #ffffff;
+        --text-color: #222;
+        --card-bg: #f9f9f9;
+        --link-color: #007acc;
+        --shadow: rgba(0, 0, 0, 0.1);
+      }
 
-    [data-theme="dark"] {
-      --bg-color: #1e1e1e;
-      --text-color: #f0f0f0;
-      --card-bg: #2c2c2c;
-      --link-color: #4eaaff;
-      --shadow: rgba(0, 0, 0, 0.4);
-    }
+      [data-theme="dark"] {
+        --bg-color: #1e1e1e;
+        --text-color: #f0f0f0;
+        --card-bg: #2c2c2c;
+        --link-color: #4eaaff;
+        --shadow: rgba(0, 0, 0, 0.4);
+      }
 
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--bg-color);
-      color: var(--text-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      transition: background 0.3s, color 0.3s;
-    }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: var(--bg-color);
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        transition: background 0.3s, color 0.3s;
+      }
 
-    .card {
-      position: relative;
-      background: var(--card-bg);
-      border-radius: 20px;
-      box-shadow: 0 8px 20px var(--shadow);
-      padding: 2.5rem 2rem 2rem;
-      text-align: center;
-      width: 320px;
-      transition: all 0.3s ease;
-    }
+      .card {
+        position: relative;
+        background: var(--card-bg);
+        border-radius: 20px;
+        box-shadow: 0 8px 20px var(--shadow);
+        padding: 2.5rem 2rem 2rem;
+        text-align: center;
+        width: 320px;
+        transition: all 0.3s ease;
+      }
 
-    .card:hover {
-      transform: translateY(-5px);
-    }
+      .card:hover {
+        transform: translateY(-5px);
+      }
 
-    .theme-toggle {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--text-color);
-      padding: 0.3rem;
-      transition: color 0.3s;
-    }
+      .theme-toggle {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--text-color);
+        padding: 0.3rem;
+        transition: color 0.3s;
+      }
 
-    .avatar {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 1rem;
-      border: 3px solid var(--link-color);
-    }
+      .avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+        border: 3px solid var(--link-color);
+      }
 
-    h1 {
-      margin: 0.5rem 0;
-      font-size: 1.6rem;
-    }
+      h1 {
+        margin: 0.5rem 0;
+        font-size: 1.6rem;
+      }
 
-    p {
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
-      color: var(--text-color);
-    }
+      p {
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+        color: var(--text-color);
+      }
 
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
+      .socials {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
 
-    .socials a {
-      color: var(--text-color);
-      transition: color 0.3s ease;
-    }
+      .socials a {
+        color: var(--text-color);
+        transition: color 0.3s ease;
+      }
 
-    .socials a:hover {
-      color: var(--link-color);
-    }
+      .socials a:hover {
+        color: var(--link-color);
+      }
 
-    .socials svg {
-      width: 24px;
-      height: 24px;
-    }
+      .socials svg {
+        width: 24px;
+        height: 24px;
+      }
 
-    footer {
-      margin-top: 2rem;
-      font-size: 0.75rem;
-      color: var(--text-color);
-    }
-  </style>
-</head>
-<body>
+      footer {
+        margin-top: 2rem;
+        font-size: 0.75rem;
+        color: var(--text-color);
+      }
+    </style>
+  </head>
 
-  <div class="card">
-    <!-- Theme toggle button -->
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-      <i id="theme-icon" data-lucide="moon"></i>
-    </button>
+  <body>
+    <div class="card">
+      <!-- Theme toggle button -->
+      <button
+        class="theme-toggle"
+        onclick="toggleTheme()"
+        aria-label="Toggle theme"
+      >
+        <div id="theme-icon"></div>
+      </button>
 
-    <!-- Gravatar for tzwlink@163.com -->
-    <img class="avatar" src="https://www.gravatar.com/avatar/5f5ddffa3a848fa1a791260820c20564?s=200" alt="Avatar" />
-    
-    <h1>Sugarscat</h1>
-    <p>Just a developer</p>
+      <!-- Gravatar for tzwlink@163.com -->
+      <img class="avatar" src="./favicon.ico" alt="Avatar" />
 
-    <div class="socials">
-      <a href="https://github.com/sugarscat" target="_blank" title="GitHub">
-        <i data-lucide="github"></i>
-      </a>
-      <a href="https://example.com" target="_blank" title="Website">
-        <i data-lucide="globe"></i>
-      </a>
+      <h1>Sugarscat</h1>
+      <p>Just a developer</p>
+
+      <div class="socials">
+        <a href="https://github.com/sugarscat" target="_blank" title="GitHub">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-github-icon lucide-github"
+          >
+            <path
+              d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+            />
+            <path d="M9 18c-4.51 2-5-2-7-2" />
+          </svg>
+        </a>
+        <a href="https://example.com" target="_blank" title="Website">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-globe-icon lucide-globe"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+            <path d="M2 12h20" />
+          </svg>
+        </a>
+      </div>
+
+      <footer>© 2025 Sugarscat · Powered by GitHub Pages</footer>
     </div>
 
-    <footer>© 2025 Sugarscat · Powered by GitHub Pages</footer>
-  </div>
+    <script>
+      window.addEventListener("load", () => {
+        updateThemeIcon();
+      });
 
-  <script>
-    window.addEventListener('load', () => {
-      lucide.createIcons();
-      updateThemeIcon();
-    });
+      function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute("data-theme");
+        const next = current === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", next);
+        updateThemeIcon();
+      }
 
-    function toggleTheme() {
-      const html = document.documentElement;
-      const current = html.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      updateThemeIcon();
-    }
+      function updateThemeIcon() {
+        const current = document.documentElement.getAttribute("data-theme");
+        const icon = document.getElementById("theme-icon");
+        if (current === "dark") {
+          icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
+        } else {
+          icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
+        }
+      }
 
-    function updateThemeIcon() {
-      const current = document.documentElement.getAttribute('data-theme');
-      const icon = document.getElementById('theme-icon');
-      icon.setAttribute('data-lucide', current === 'dark' ? 'sun' : 'moon');
-      lucide.createIcons();
-    }
-
-    // Default to browser theme
-    (function () {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const html = document.documentElement;
-      html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-    })();
-  </script>
-
-</body>
+      // Default to browser theme
+      (function () {
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const html = document.documentElement;
+        html.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      })();
+    </script>
+  </body>
 </html>
