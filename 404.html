@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* 默认浅色主题 */
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --secondary-text: #6c757d;
+            --line-color: #212529;
+            --dot-color: #495057;
+            --btn-home-bg: #212529;
+            --btn-home-text: #f8f9fa;
+            --btn-home-hover: #343a40;
+            --btn-back-bg: transparent;
+            --btn-back-border: #212529;
+            --btn-back-text: #212529;
+            --btn-back-hover: rgba(33, 37, 41, 0.05);
+        }
+        
+        /* 暗色主题 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #121212;
+                --text-color: #e9ecef;
+                --secondary-text: #adb5bd;
+                --line-color: #e9ecef;
+                --dot-color: #868e96;
+                --btn-home-bg: #e9ecef;
+                --btn-home-text: #121212;
+                --btn-home-hover: #f8f9fa;
+                --btn-back-bg: transparent;
+                --btn-back-border: #e9ecef;
+                --btn-back-text: #e9ecef;
+                --btn-back-hover: rgba(233, 236, 239, 0.1);
+            }
+        }
+        
+        body {
+            background: var(--bg-color);
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            padding: 20px;
+            color: var(--text-color);
+            transition: background 0.3s ease;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .art-section {
+            margin-bottom: 40px;
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* 抽象线条艺术 */
+        .line-art {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .horizontal-line,
+        .vertical-line,
+        .diagonal-line-1,
+        .diagonal-line-2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--line-color);
+            transition: background 0.3s ease;
+        }
+        .horizontal-line {
+            animation: lineFloatH 8s ease-in-out infinite;
+        }
+        .vertical-line {
+            animation: lineFloatV 10s ease-in-out infinite;
+        }
+        .diagonal-line-1 {
+            animation: lineFloatD1 12s ease-in-out infinite;
+        }
+        .diagonal-line-2 {
+            animation: lineFloatD2 14s ease-in-out infinite;
+        }
+        
+        .horizontal-line {
+            width: 60%;
+            height: 2px;
+        }
+        
+        .vertical-line {
+            width: 2px;
+            height: 60%;
+        }
+        
+        .diagonal-line-1 {
+            width: 70%;
+            height: 2px;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+        
+        .diagonal-line-2 {
+            width: 70%;
+            height: 2px;
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+        
+        /* 漂浮的点 */
+        .floating-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--dot-color);
+            border-radius: 50%;
+            animation: floatDot 6s ease-in-out infinite;
+            transition: background 0.3s ease;
+        }
+        
+        .dot-1 {
+            top: 20%;
+            left: 30%;
+            animation-delay: 0s;
+        }
+        
+        .dot-2 {
+            top: 70%;
+            left: 70%;
+            animation-delay: 1s;
+        }
+        
+        .dot-3 {
+            top: 40%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+        
+        .dot-4 {
+            top: 80%;
+            left: 20%;
+            animation-delay: 3s;
+        }
+        
+        /* 错误代码 */
+        .error-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            font-weight: 900;
+            color: var(--text-color);
+            font-family: 'Georgia', serif;
+            letter-spacing: 8px;
+            z-index: 2;
+            transition: color 0.3s ease;
+        }
+        
+        .info-section {
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+        
+        p {
+            font-size: 16px;
+            color: var(--secondary-text);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: color 0.3s ease;
+        }
+        
+        .btn-container {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 32px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 300;
+            text-transform: uppercase;
+            border-radius: 2px;
+            border: none;
+        }
+        
+        .btn-home {
+            background: var(--btn-home-bg);
+            color: var(--btn-home-text);
+        }
+        
+        .btn-home:hover {
+            background: var(--btn-home-hover);
+            transform: translateY(-2px);
+        }
+        
+        .btn-back {
+            background: var(--btn-back-bg);
+            color: var(--btn-back-text);
+            border: 1px solid var(--btn-back-border);
+        }
+        
+        .btn-back:hover {
+            background: var(--btn-back-hover);
+            transform: translateY(-2px);
+        }
+        
+        /* 动画 */
+        @keyframes lineFloatH {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-50%, -50%) rotate(6deg); }
+            50% { transform: translate(-50%, -50%) rotate(0deg); }
+            75% { transform: translate(-50%, -50%) rotate(-6deg); }
+        }
+        @keyframes lineFloatV {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            20% { transform: translate(-50%, -50%) rotate(5deg); }
+            50% { transform: translate(-50%, -50%) rotate(0deg); }
+            80% { transform: translate(-50%, -50%) rotate(-5deg); }
+        }
+        @keyframes lineFloatD1 {
+            0%, 100% { transform: translate(-50%, -50%) rotate(20deg); }
+            30% { transform: translate(-50%, -50%) rotate(25deg); }
+            60% { transform: translate(-50%, -50%) rotate(15deg); }
+        }
+        @keyframes lineFloatD2 {
+            0%, 100% { transform: translate(-50%, -50%) rotate(-20deg); }
+            40% { transform: translate(-50%, -50%) rotate(-15deg); }
+            70% { transform: translate(-50%, -50%) rotate(-25deg); }
+        }
+        
+        @keyframes floatDot {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(10px, -15px); }
+            50% { transform: translate(0, 0); }
+            75% { transform: translate(-10px, 15px); }
+        }
+        
+        @media (max-width: 768px) {
+            .art-section {
+                width: 200px;
+                height: 200px;
+                margin-bottom: 30px;
+            }
+            
+            .error-text { font-size: 60px; }
+            
+            h1 { font-size: 24px; }
+            p { font-size: 14px; }
+            
+            .info-section {
+                padding: 0 15px;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        @media (max-height: 600px) {
+            .art-section {
+                width: 200px;
+                height: 200px;
+                margin-bottom: 20px;
+            }
+            
+            .error-text { font-size: 50px; }
+            
+            h1 { font-size: 22px; }
+            p { font-size: 14px; margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="art-section">
+            <div class="line-art">
+                <div class="horizontal-line"></div>
+                <div class="vertical-line"></div>
+                <div class="diagonal-line-1"></div>
+                <div class="diagonal-line-2"></div>
+                <div class="floating-dot dot-1"></div>
+                <div class="floating-dot dot-2"></div>
+                <div class="floating-dot dot-3"></div>
+                <div class="floating-dot dot-4"></div>
+                <div class="error-text">404</div>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h1 id="title">PAGE NOT FOUND</h1>
+            <p id="description">The page you are looking for does not exist. It may have been moved, deleted, or the URL may be incorrect.</p>
+            <div class="btn-container">
+                <button class="btn btn-home" id="homeBtn" onclick="window.location.href='/'">Return Home</button>
+                <button class="btn btn-back" id="backBtn" onclick="history.back()">Go Back</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 语言内容配置
+        const translations = {
+            'zh': {
+                title: '页面未找到',
+                description: '您寻找的页面不存在，可能已被移动、删除，或网址输入有误。',
+                homeBtn: '返回首页',
+                backBtn: '返回上一页'
+            },
+            'zh-CN': {
+                title: '页面未找到',
+                description: '您寻找的页面不存在，可能已被移动、删除，或网址输入有误。',
+                homeBtn: '返回首页',
+                backBtn: '返回上一页'
+            },
+            'zh-TW': {
+                title: '頁面未找到',
+                description: '您尋找的頁面不存在，可能已被移動、刪除，或網址輸入有誤。',
+                homeBtn: '返回首頁',
+                backBtn: '返回上一頁'
+            },
+            'zh-HK': {
+                title: '頁面未找到',
+                description: '您尋找的頁面不存在，可能已被移動、刪除，或網址輸入有誤。',
+                homeBtn: '返回首頁',
+                backBtn: '返回上一頁'
+            },
+            'en': {
+                title: 'PAGE NOT FOUND',
+                description: 'The page you are looking for does not exist. It may have been moved, deleted, or the URL may be incorrect.',
+                homeBtn: 'Return Home',
+                backBtn: 'Go Back'
+            }
+        };
+
+        // 获取浏览器语言
+        function getBrowserLanguage() {
+            return (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        }
+
+        // 设置页面语言
+        function setLanguage() {
+            const lang = getBrowserLanguage();
+            const langCode = lang.startsWith('zh') ? 
+                (lang === 'zh-cn' || lang === 'zh') ? 'zh-CN' : 
+                (lang === 'zh-tw') ? 'zh-TW' : 
+                (lang === 'zh-hk') ? 'zh-HK' : 'zh' : 'en';
+            
+            // 如果是中文语言，则更新页面内容
+            if (langCode.startsWith('zh')) {
+                document.getElementById('title').textContent = translations[langCode].title;
+                document.getElementById('description').textContent = translations[langCode].description;
+                document.getElementById('homeBtn').textContent = translations[langCode].homeBtn;
+                document.getElementById('backBtn').textContent = translations[langCode].backBtn;
+                document.documentElement.lang = langCode;
+            } else {
+                // 默认英文
+                document.getElementById('homeBtn').textContent = translations.en.homeBtn;
+                document.getElementById('backBtn').textContent = translations.en.backBtn;
+                document.documentElement.lang = 'en';
+            }
+        }
+
+        // 页面加载完成后设置语言
+        document.addEventListener('DOMContentLoaded', setLanguage);
+        
+        // 监听主题变化
+        if (window.matchMedia) {
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            darkModeMediaQuery.addEventListener('change', () => {
+                // 强制重绘以确保颜色正确更新
+                document.body.style.opacity = 0.99;
+                setTimeout(() => {
+                    document.body.style.opacity = 1;
+                }, 50);
+            });
+        }
+    </script>
+</body>
+</html>
