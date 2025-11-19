@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="doc-title">404 - Page Not Found</title>
+    <title id="doc-title">504 - Gateway Timeout</title>
     <style>
         /* 基础重置 */
         * {
@@ -43,7 +43,7 @@
             }
         }
 
-        /* 图标样式 */
+        /* 图标样式 - 504 使用红色/品红色系，代表超时/停止 */
         .icon-wrapper {
             display: inline-flex;
             align-items: center;
@@ -51,8 +51,8 @@
             width: 5rem;
             height: 5rem;
             border-radius: 9999px;
-            background-color: #f3f4f6; /* gray-100 */
-            color: #9ca3af; /* gray-400 */
+            background-color: #fdf2f8; /* pink-50 or rose-50 */
+            color: #db2777; /* pink-600 or rose-600 */
             margin-bottom: 1.5rem;
             transition: background-color 0.3s, color 0.3s;
         }
@@ -139,8 +139,8 @@
             }
 
             .icon-wrapper {
-                background-color: #1f2937; /* gray-800 */
-                color: #6b7280; /* gray-500 */
+                background-color: #5b21b6; /* dark violet bg - closest strong color to pink/rose in dark mode */
+                color: #e879f9; /* light fuchsia/pink text */
             }
 
             h1 {
@@ -179,32 +179,33 @@
 <body>
 
     <div class="container">
-        <!-- 图标区域 -->
+        <!-- 图标区域 (时钟图标，代表超时) -->
         <div class="icon-wrapper">
             <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
         </div>
 
         <!-- 核心数字 -->
-        <h1>404</h1>
+        <h1>504</h1>
         
         <!-- 简短说明 -->
-        <h2 id="txt-subtitle">Page Not Found</h2>
+        <h2 id="txt-subtitle">Gateway Timeout</h2>
         
         <p id="txt-desc">
-            Sorry, the page you are looking for does not exist, has been moved, or removed.<br>Please check the URL.
+            The upstream server did not respond in time.<br>This usually indicates a temporary overload.
         </p>
 
         <!-- 操作按钮 -->
         <div class="btn-group">
-            <a href="/" id="btn-home" class="btn btn-primary">
+            <!-- 504 错误可能是暂时的，建议刷新 -->
+            <button onclick="location.reload()" id="btn-refresh" class="btn btn-primary">
+                Refresh Page
+            </button>
+
+            <a href="/" id="btn-home" class="btn btn-secondary">
                 Go Home
             </a>
-            
-            <button onclick="history.back()" id="btn-back" class="btn btn-secondary">
-                Go Back
-            </button>
         </div>
     </div>
 
@@ -212,25 +213,25 @@
     <script>
         const resources = {
             'zh': {
-                title: '404 - 页面未找到',
-                subtitle: '找不到页面',
-                desc: '抱歉，您访问的页面不存在、已被移动或删除。<br>请检查链接是否正确。',
-                home: '返回首页',
-                back: '返回上一页'
+                title: '504 - 网关超时',
+                subtitle: '网关超时',
+                desc: '上游服务器在规定时间内没有响应。<br>这通常表明服务器暂时过载。',
+                refresh: '刷新页面',
+                home: '返回首页'
             },
             'ja': {
-                title: '404 - ページが見つかりません',
-                subtitle: 'ページが見つかりません',
-                desc: '申し訳ありませんが、お探しのページは存在しないか、移動または削除された可能性があります。<br>URLをご確認ください。',
-                home: 'ホームに戻る',
-                back: '前のページに戻る'
+                title: '504 - ゲートウェイタイムアウト',
+                subtitle: 'ゲートウェイタイムアウト',
+                desc: '上流サーバーが時間内に応答しませんでした。<br>これは通常、一時的な過負荷を示します。',
+                refresh: '再読み込み',
+                home: 'ホームに戻る'
             },
             'en': {
-                title: '404 - Page Not Found',
-                subtitle: 'Page Not Found',
-                desc: 'Sorry, the page you are looking for does not exist, has been moved, or removed.<br>Please check the URL.',
-                home: 'Go Home',
-                back: 'Go Back'
+                title: '504 - Gateway Timeout',
+                subtitle: 'Gateway Timeout',
+                desc: 'The upstream server did not respond in time.<br>This usually indicates a temporary overload.',
+                refresh: 'Refresh Page',
+                home: 'Go Home'
             }
         };
 
@@ -248,8 +249,8 @@
             document.getElementById('doc-title').textContent = text.title;
             document.getElementById('txt-subtitle').textContent = text.subtitle;
             document.getElementById('txt-desc').innerHTML = text.desc;
+            document.getElementById('btn-refresh').textContent = text.refresh;
             document.getElementById('btn-home').textContent = text.home;
-            document.getElementById('btn-back').textContent = text.back;
             
             // 设置 html lang 属性
             document.documentElement.lang = langCode === 'zh' ? 'zh-CN' : langCode;

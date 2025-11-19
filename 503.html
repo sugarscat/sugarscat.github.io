@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="doc-title">404 - Page Not Found</title>
+    <title id="doc-title">503 - Service Unavailable</title>
     <style>
         /* 基础重置 */
         * {
@@ -43,7 +43,7 @@
             }
         }
 
-        /* 图标样式 */
+        /* 图标样式 - 503 使用靛青色/蓝色系，代表维护/中立 */
         .icon-wrapper {
             display: inline-flex;
             align-items: center;
@@ -51,8 +51,8 @@
             width: 5rem;
             height: 5rem;
             border-radius: 9999px;
-            background-color: #f3f4f6; /* gray-100 */
-            color: #9ca3af; /* gray-400 */
+            background-color: #eff6ff; /* blue-50 */
+            color: #3b82f6; /* blue-500 */
             margin-bottom: 1.5rem;
             transition: background-color 0.3s, color 0.3s;
         }
@@ -139,8 +139,8 @@
             }
 
             .icon-wrapper {
-                background-color: #1f2937; /* gray-800 */
-                color: #6b7280; /* gray-500 */
+                background-color: #172554; /* dark blue bg */
+                color: #60a5fa; /* light blue text */
             }
 
             h1 {
@@ -179,32 +179,34 @@
 <body>
 
     <div class="container">
-        <!-- 图标区域 -->
+        <!-- 图标区域 (扳手/工具图标) -->
         <div class="icon-wrapper">
             <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
         </div>
 
         <!-- 核心数字 -->
-        <h1>404</h1>
+        <h1>503</h1>
         
         <!-- 简短说明 -->
-        <h2 id="txt-subtitle">Page Not Found</h2>
+        <h2 id="txt-subtitle">Service Unavailable</h2>
         
         <p id="txt-desc">
-            Sorry, the page you are looking for does not exist, has been moved, or removed.<br>Please check the URL.
+            The server is currently unable to handle the request due to temporary overloading or maintenance of the server.
         </p>
 
         <!-- 操作按钮 -->
         <div class="btn-group">
-            <a href="/" id="btn-home" class="btn btn-primary">
+            <!-- 503 通常意味着稍后会好，所以 Check Status 或 Refresh 是主要动作 -->
+            <button onclick="location.reload()" id="btn-retry" class="btn btn-primary">
+                Retry Now
+            </button>
+            
+            <a href="/" id="btn-home" class="btn btn-secondary">
                 Go Home
             </a>
-            
-            <button onclick="history.back()" id="btn-back" class="btn btn-secondary">
-                Go Back
-            </button>
         </div>
     </div>
 
@@ -212,25 +214,25 @@
     <script>
         const resources = {
             'zh': {
-                title: '404 - 页面未找到',
-                subtitle: '找不到页面',
-                desc: '抱歉，您访问的页面不存在、已被移动或删除。<br>请检查链接是否正确。',
-                home: '返回首页',
-                back: '返回上一页'
+                title: '503 - 服务不可用',
+                subtitle: '系统维护中',
+                desc: '服务器暂时无法处理请求，可能是因为过载或正在进行停机维护。<br>请稍后再试。',
+                retry: '重试',
+                home: '返回首页'
             },
             'ja': {
-                title: '404 - ページが見つかりません',
-                subtitle: 'ページが見つかりません',
-                desc: '申し訳ありませんが、お探しのページは存在しないか、移動または削除された可能性があります。<br>URLをご確認ください。',
-                home: 'ホームに戻る',
-                back: '前のページに戻る'
+                title: '503 - サービス利用不可',
+                subtitle: 'ただいまメンテナンス中です',
+                desc: 'サーバーが一時的に過負荷状態になっているか、メンテナンス中のためリクエストを処理できません。<br>しばらくしてからもう一度お試しください。',
+                retry: '再試行',
+                home: 'ホームに戻る'
             },
             'en': {
-                title: '404 - Page Not Found',
-                subtitle: 'Page Not Found',
-                desc: 'Sorry, the page you are looking for does not exist, has been moved, or removed.<br>Please check the URL.',
-                home: 'Go Home',
-                back: 'Go Back'
+                title: '503 - Service Unavailable',
+                subtitle: 'Service Unavailable',
+                desc: 'The server is currently unable to handle the request due to temporary overloading or maintenance of the server.',
+                retry: 'Retry Now',
+                home: 'Go Home'
             }
         };
 
@@ -248,8 +250,8 @@
             document.getElementById('doc-title').textContent = text.title;
             document.getElementById('txt-subtitle').textContent = text.subtitle;
             document.getElementById('txt-desc').innerHTML = text.desc;
+            document.getElementById('btn-retry').textContent = text.retry;
             document.getElementById('btn-home').textContent = text.home;
-            document.getElementById('btn-back').textContent = text.back;
             
             // 设置 html lang 属性
             document.documentElement.lang = langCode === 'zh' ? 'zh-CN' : langCode;

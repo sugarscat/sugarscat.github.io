@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="doc-title">404 - Page Not Found</title>
+    <title id="doc-title">500 - Internal Server Error</title>
     <style>
         /* 基础重置 */
         * {
@@ -51,8 +51,8 @@
             width: 5rem;
             height: 5rem;
             border-radius: 9999px;
-            background-color: #f3f4f6; /* gray-100 */
-            color: #9ca3af; /* gray-400 */
+            background-color: #fef2f2; /* red-50 (更适合错误的浅红背景) */
+            color: #ef4444; /* red-500 */
             margin-bottom: 1.5rem;
             transition: background-color 0.3s, color 0.3s;
         }
@@ -139,8 +139,8 @@
             }
 
             .icon-wrapper {
-                background-color: #1f2937; /* gray-800 */
-                color: #6b7280; /* gray-500 */
+                background-color: #450a0a; /* dark red bg */
+                color: #f87171; /* light red text */
             }
 
             h1 {
@@ -179,21 +179,21 @@
 <body>
 
     <div class="container">
-        <!-- 图标区域 -->
+        <!-- 图标区域 (闪电图标) -->
         <div class="icon-wrapper">
             <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
         </div>
 
         <!-- 核心数字 -->
-        <h1>404</h1>
+        <h1>500</h1>
         
         <!-- 简短说明 -->
-        <h2 id="txt-subtitle">Page Not Found</h2>
+        <h2 id="txt-subtitle">Internal Server Error</h2>
         
         <p id="txt-desc">
-            Sorry, the page you are looking for does not exist, has been moved, or removed.<br>Please check the URL.
+            Sorry, something went wrong on our end.<br>Please try again later.
         </p>
 
         <!-- 操作按钮 -->
@@ -202,8 +202,9 @@
                 Go Home
             </a>
             
-            <button onclick="history.back()" id="btn-back" class="btn btn-secondary">
-                Go Back
+            <!-- 500错误通常建议刷新 -->
+            <button onclick="location.reload()" id="btn-refresh" class="btn btn-secondary">
+                Refresh Page
             </button>
         </div>
     </div>
@@ -212,25 +213,25 @@
     <script>
         const resources = {
             'zh': {
-                title: '404 - 页面未找到',
-                subtitle: '找不到页面',
-                desc: '抱歉，您访问的页面不存在、已被移动或删除。<br>请检查链接是否正确。',
+                title: '500 - 服务器内部错误',
+                subtitle: '服务器内部错误',
+                desc: '抱歉，服务器遇到了一些问题。<br>请稍后再试。',
                 home: '返回首页',
-                back: '返回上一页'
+                refresh: '刷新页面'
             },
             'ja': {
-                title: '404 - ページが見つかりません',
-                subtitle: 'ページが見つかりません',
-                desc: '申し訳ありませんが、お探しのページは存在しないか、移動または削除された可能性があります。<br>URLをご確認ください。',
+                title: '500 - サーバー内部エラー',
+                subtitle: 'サーバー内部エラー',
+                desc: '申し訳ありませんが、サーバー側で問題が発生しました。<br>しばらくしてからもう一度お試しください。',
                 home: 'ホームに戻る',
-                back: '前のページに戻る'
+                refresh: '再読み込み'
             },
             'en': {
-                title: '404 - Page Not Found',
-                subtitle: 'Page Not Found',
-                desc: 'Sorry, the page you are looking for does not exist, has been moved, or removed.<br>Please check the URL.',
+                title: '500 - Internal Server Error',
+                subtitle: 'Internal Server Error',
+                desc: 'Sorry, something went wrong on our end.<br>Please try again later.',
                 home: 'Go Home',
-                back: 'Go Back'
+                refresh: 'Refresh Page'
             }
         };
 
@@ -249,7 +250,7 @@
             document.getElementById('txt-subtitle').textContent = text.subtitle;
             document.getElementById('txt-desc').innerHTML = text.desc;
             document.getElementById('btn-home').textContent = text.home;
-            document.getElementById('btn-back').textContent = text.back;
+            document.getElementById('btn-refresh').textContent = text.refresh;
             
             // 设置 html lang 属性
             document.documentElement.lang = langCode === 'zh' ? 'zh-CN' : langCode;

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="doc-title">404 - Page Not Found</title>
+    <title id="doc-title">401 - Unauthorized</title>
     <style>
         /* 基础重置 */
         * {
@@ -43,7 +43,7 @@
             }
         }
 
-        /* 图标样式 */
+        /* 图标样式 - 401 使用琥珀色/黄色系，代表需要钥匙/验证 */
         .icon-wrapper {
             display: inline-flex;
             align-items: center;
@@ -51,8 +51,8 @@
             width: 5rem;
             height: 5rem;
             border-radius: 9999px;
-            background-color: #f3f4f6; /* gray-100 */
-            color: #9ca3af; /* gray-400 */
+            background-color: #fffbeb; /* amber-50 */
+            color: #d97706; /* amber-600 */
             margin-bottom: 1.5rem;
             transition: background-color 0.3s, color 0.3s;
         }
@@ -139,8 +139,8 @@
             }
 
             .icon-wrapper {
-                background-color: #1f2937; /* gray-800 */
-                color: #6b7280; /* gray-500 */
+                background-color: #451a03; /* dark amber/brown bg */
+                color: #fbbf24; /* light amber text */
             }
 
             h1 {
@@ -179,32 +179,32 @@
 <body>
 
     <div class="container">
-        <!-- 图标区域 -->
+        <!-- 图标区域 (钥匙图标) -->
         <div class="icon-wrapper">
             <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
             </svg>
         </div>
 
         <!-- 核心数字 -->
-        <h1>404</h1>
+        <h1>401</h1>
         
         <!-- 简短说明 -->
-        <h2 id="txt-subtitle">Page Not Found</h2>
+        <h2 id="txt-subtitle">Authentication Required</h2>
         
         <p id="txt-desc">
-            Sorry, the page you are looking for does not exist, has been moved, or removed.<br>Please check the URL.
+            Access to this resource requires authentication.<br>Please log in to continue.
         </p>
 
         <!-- 操作按钮 -->
         <div class="btn-group">
-            <a href="/" id="btn-home" class="btn btn-primary">
-                Go Home
+            <a href="/login" id="btn-login" class="btn btn-primary">
+                Log In
             </a>
             
-            <button onclick="history.back()" id="btn-back" class="btn btn-secondary">
-                Go Back
-            </button>
+            <a href="/" id="btn-home" class="btn btn-secondary">
+                Go Home
+            </a>
         </div>
     </div>
 
@@ -212,25 +212,25 @@
     <script>
         const resources = {
             'zh': {
-                title: '404 - 页面未找到',
-                subtitle: '找不到页面',
-                desc: '抱歉，您访问的页面不存在、已被移动或删除。<br>请检查链接是否正确。',
-                home: '返回首页',
-                back: '返回上一页'
+                title: '401 - 需要身份验证',
+                subtitle: '需要身份验证',
+                desc: '访问此资源需要身份验证。<br>请登录后继续。',
+                login: '立即登录',
+                home: '返回首页'
             },
             'ja': {
-                title: '404 - ページが見つかりません',
-                subtitle: 'ページが見つかりません',
-                desc: '申し訳ありませんが、お探しのページは存在しないか、移動または削除された可能性があります。<br>URLをご確認ください。',
-                home: 'ホームに戻る',
-                back: '前のページに戻る'
+                title: '401 - 認証が必要です',
+                subtitle: '認証が必要です',
+                desc: 'このリソースにアクセスするには認証が必要です。<br>ログインして続行してください。',
+                login: 'ログイン',
+                home: 'ホームに戻る'
             },
             'en': {
-                title: '404 - Page Not Found',
-                subtitle: 'Page Not Found',
-                desc: 'Sorry, the page you are looking for does not exist, has been moved, or removed.<br>Please check the URL.',
-                home: 'Go Home',
-                back: 'Go Back'
+                title: '401 - Unauthorized',
+                subtitle: 'Authentication Required',
+                desc: 'Access to this resource requires authentication.<br>Please log in to continue.',
+                login: 'Log In',
+                home: 'Go Home'
             }
         };
 
@@ -248,8 +248,8 @@
             document.getElementById('doc-title').textContent = text.title;
             document.getElementById('txt-subtitle').textContent = text.subtitle;
             document.getElementById('txt-desc').innerHTML = text.desc;
+            document.getElementById('btn-login').textContent = text.login;
             document.getElementById('btn-home').textContent = text.home;
-            document.getElementById('btn-back').textContent = text.back;
             
             // 设置 html lang 属性
             document.documentElement.lang = langCode === 'zh' ? 'zh-CN' : langCode;

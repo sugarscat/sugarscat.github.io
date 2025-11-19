@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="doc-title">404 - Page Not Found</title>
+    <title id="doc-title">403 - Forbidden</title>
     <style>
         /* 基础重置 */
         * {
@@ -43,7 +43,7 @@
             }
         }
 
-        /* 图标样式 */
+        /* 图标样式 - 403 使用紫色系，代表权限/私密 */
         .icon-wrapper {
             display: inline-flex;
             align-items: center;
@@ -51,8 +51,8 @@
             width: 5rem;
             height: 5rem;
             border-radius: 9999px;
-            background-color: #f3f4f6; /* gray-100 */
-            color: #9ca3af; /* gray-400 */
+            background-color: #f3e8ff; /* purple-50 */
+            color: #9333ea; /* purple-600 */
             margin-bottom: 1.5rem;
             transition: background-color 0.3s, color 0.3s;
         }
@@ -139,8 +139,8 @@
             }
 
             .icon-wrapper {
-                background-color: #1f2937; /* gray-800 */
-                color: #6b7280; /* gray-500 */
+                background-color: #3b0764; /* dark purple bg */
+                color: #a855f7; /* light purple text */
             }
 
             h1 {
@@ -179,21 +179,21 @@
 <body>
 
     <div class="container">
-        <!-- 图标区域 -->
+        <!-- 图标区域 (锁图标) -->
         <div class="icon-wrapper">
             <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
         </div>
 
         <!-- 核心数字 -->
-        <h1>404</h1>
+        <h1>403</h1>
         
         <!-- 简短说明 -->
-        <h2 id="txt-subtitle">Page Not Found</h2>
+        <h2 id="txt-subtitle">Access Forbidden</h2>
         
         <p id="txt-desc">
-            Sorry, the page you are looking for does not exist, has been moved, or removed.<br>Please check the URL.
+            You do not have permission to access this page.<br>Please contact your administrator if you believe this is a mistake.
         </p>
 
         <!-- 操作按钮 -->
@@ -212,23 +212,23 @@
     <script>
         const resources = {
             'zh': {
-                title: '404 - 页面未找到',
-                subtitle: '找不到页面',
-                desc: '抱歉，您访问的页面不存在、已被移动或删除。<br>请检查链接是否正确。',
+                title: '403 - 禁止访问',
+                subtitle: '访问被拒绝',
+                desc: '您没有权限访问此页面。<br>如果您认为这是一个错误，请联系管理员。',
                 home: '返回首页',
                 back: '返回上一页'
             },
             'ja': {
-                title: '404 - ページが見つかりません',
-                subtitle: 'ページが見つかりません',
-                desc: '申し訳ありませんが、お探しのページは存在しないか、移動または削除された可能性があります。<br>URLをご確認ください。',
+                title: '403 - アクセス禁止',
+                subtitle: 'アクセスが拒否されました',
+                desc: 'このページにアクセスする権限がありません。<br>間違いだと思われる場合は、管理者にお問い合わせください。',
                 home: 'ホームに戻る',
                 back: '前のページに戻る'
             },
             'en': {
-                title: '404 - Page Not Found',
-                subtitle: 'Page Not Found',
-                desc: 'Sorry, the page you are looking for does not exist, has been moved, or removed.<br>Please check the URL.',
+                title: '403 - Access Forbidden',
+                subtitle: 'Access Forbidden',
+                desc: 'You do not have permission to access this page.<br>Please contact your administrator if you believe this is a mistake.',
                 home: 'Go Home',
                 back: 'Go Back'
             }
