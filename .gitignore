@@ -1,0 +1,4 @@
+# IED
+.vscode
+.idea/**
+!.idea/icon.png
